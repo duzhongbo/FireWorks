@@ -9,7 +9,7 @@
 
 <style type="text/css">
 .box{width:4px;height:30px;border-radius:4px;background-color:#f00;position:absolute;left:50%;}
-.box2{width:4px;height:4px;border-radius:4px;background-color:#0f0;position:absolute;}
+.box2{width:4px;height:4px;border-radius:4px;background-color:#0f0;position:absolute;left:50%;top:270px;}
 
 </style>
 
@@ -25,9 +25,22 @@ function up(){
 		if(box.offsetTop<300){
 			clearInterval(t);
 			document.body.removeChild(box);
+			down();
 			return;
 		}
 		box.style.top = box.offsetTop - 20 +'px';
+	},30);
+}
+// 烟花碎片坠落
+function down(){
+	box2.speedX = 0;
+	box2.speedY = 0;
+	window.t2 = setInterval(function(){
+		box2.style.top = box2.offsetTop + box2.speedY +'px';
+		box2.style.left = box2.offsetLeft + box2.speedX +'px';
+		box2.speedY++;
+		box2.offsetTop > document.documentElement.clientHeight ? document.body.removeChild(box2) : '';
+		!window.box2 && clearInterval(t2);
 	},30);
 }
 </script>
